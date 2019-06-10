@@ -5,12 +5,12 @@
  * Created on 9 de junio de 2019, 01:26 AM
  */
 
-#ifndef LISTACIRCULARSIMPLE_H
-#define	LISTACIRCULARSIMPLE_H
+#ifndef LISTACIRCULARDOBLE_H
+#define	LISTACIRCULARDOBLE_H
 #include "Nodo.h"
 #include <iostream>
 
-template <class T> class ListaCircularSimple {
+template <class T> class ListaCircularDoble {
 public:
     bool isEmpty();
     int getLargo();
@@ -28,33 +28,36 @@ private:
  * 
  * @return 
  */
-template <class T> bool ListaCircularSimple<T>::isEmpty(){
+template <class T> bool ListaCircularDoble<T>::isEmpty(){
     return inicio == NULL;
 }
 /**
  * 
  * @return 
  */
-template <class T> int ListaCircularSimple<T>::getLargo(){
+template <class T> int ListaCircularDoble<T>::getLargo(){
     return largo;
 }
 /**
  * 
  * @param dato
  */
-template <class T> void ListaCircularSimple<T>::addLast(T dato){
+template <class T> void ListaCircularDoble<T>::addLast(T dato){
     Nodo<T> *nuevo = new Nodo<T>(dato);
     if (isEmpty())
     {
+        nuevo->siguiente = inicio;
+        nuevo->anterior = final;
         inicio = nuevo;
-        inicio->siguiente = inicio;
-        final = inicio;
+        final = nuevo;
         largo++;
     }
     else
     {
         final->siguiente = nuevo;
+        nuevo->anterior = final;
         nuevo->siguiente = inicio;
+        inicio->anterior = nuevo;
         final = nuevo;
         largo++;
     }
@@ -62,7 +65,7 @@ template <class T> void ListaCircularSimple<T>::addLast(T dato){
 /**
  * 
  */
-template <class T> void ListaCircularSimple<T>::print(){
+template <class T> void ListaCircularDoble<T>::print(){
     Nodo<T> *temp = inicio;
     do{
         std::cout<<temp->getDato()<<std::endl;

@@ -7,7 +7,7 @@
 
 #include <cstdlib>
 #include <iostream>
-#include "ListaCircularSimple.h"
+#include "ListaCircularDoble.h"
 using namespace std;
 /**/
 //template <class T> void addLast(T dato);
@@ -17,7 +17,7 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-    ListaCircularSimple<int> *list = new ListaCircularSimple<int>();
+    ListaCircularDoble<int> *list = new ListaCircularDoble<int>();
     for(int i=0; i<10;i++){
         list->addLast(i);
     }
