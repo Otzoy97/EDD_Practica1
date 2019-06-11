@@ -46,8 +46,8 @@ template <class T> void Cola<T>::encolar(T dato){
 
 template <class T> T Cola<T>::desencolar(){
     T dato = inicio->getDato();
-    Nodo *temp = inicio->siguiente;
-    inicio = temp;
+    Nodo<T> *temp = inicio;
+    inicio = temp->siguiente;
     delete temp;
     largo--;
     return dato;

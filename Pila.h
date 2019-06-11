@@ -52,8 +52,8 @@ template <class T> T Pila<T>::peek(){
 
 template <class T> T Pila<T>::pop(){
     T dato = inicio->getDato();
-    Nodo *temp = inicio->siguiente;
-    inicio = temp;
+    Nodo<T> *temp = inicio;
+    inicio = temp->siguiente;
     delete temp;
     largo--;
     return dato;
