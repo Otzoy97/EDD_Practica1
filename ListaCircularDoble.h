@@ -8,7 +8,11 @@
 #ifndef LISTACIRCULARDOBLE_H
 #define	LISTACIRCULARDOBLE_H
 #include "Nodo.h"
+#include <string>
 #include <iostream>
+#include <sstream>
+
+using namespace std;
 
 template <class T> class ListaCircularDoble {
 public:
@@ -19,7 +23,9 @@ public:
     void remove(T dato);
     T removeAt (int index);
     void print();
+    string dot(const string& nombre, int contador);
 private:
+    //string recorrer(Nodo <T> *nodito);
     Nodo<T> *inicio;
     Nodo<T> *final;
     int largo = 0;
@@ -127,11 +133,27 @@ template <class T> T ListaCircularDoble<T>::removeAt(int index){
 template <class T> void ListaCircularDoble<T>::print(){
     Nodo<T> *temp = inicio;
     do{
-        std::cout<<temp->getDato()<<std::endl;
+        cout<<temp->getDato()<<endl;
         temp = temp->siguiente;
     }while(temp!=inicio);
     delete temp;
 }
 
+template <class T> string ListaCircularDoble<T>::dot(const string& nombre, int contador){
+    stringstream retorno;
+    Nodo<T> *temp = inicio;
+    retorno << "subgraph cluster" << contador << "{" << endl << "label = \"" << nombre << "\"" << endl;
+    do{
+        retorno << "p" << temp << "[label= \"" << temp->getDato() << "\"];" << endl;
+        
+        if (temp->siguiente!=NULL)
+            retorno << "p" << temp->siguiente << "-> p" << temp << endl;
+        if (temp->anterior!=NULL)
+            retorno << "p" << temp->anterior << "-> p" << temp << endl;
+        temp = temp->siguiente;
+    } while (temp!=inicio);  
+    retorno << "}" << endl;
+    return retorno.str();
+}
 #endif	/* LISTACIRCULARSIMPLE_H */
 

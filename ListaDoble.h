@@ -8,7 +8,11 @@
 #ifndef LISTADOBLE_H
 #define	LISTADOBLE_H
 #include "Nodo.h"
+#include <string>
 #include <iostream>
+#include <sstream>
+
+using namespace std;
 
 template <class T> class ListaDoble{
     public:
@@ -19,7 +23,9 @@ template <class T> class ListaDoble{
         void remove (T dato);
         T removeAt (int index);
         void print();
+        string dot(const string& nombre, int contador);
     private:
+        string recorrer(Nodo<T> *nodito);//, const string& nodo_anterior);
         Nodo<T> *inicio;
         Nodo<T> *final;
         int largo = 0;
@@ -130,6 +136,28 @@ template <class T> void ListaDoble<T>::print(){
         temp = temp->siguiente;
     }
     delete temp;
+}
+
+template <class T> string ListaDoble<T>::dot(const string& nombre, int contador){
+    stringstream retorno;
+    retorno << "subgraph cluster" << contador << "{" << endl;
+    retorno << "label = \"" << nombre << "\"" << endl;
+    retorno << recorrer(inicio);
+    retorno << "}" << endl;
+    return retorno.str();
+} 
+
+template <class T> string ListaDoble<T>::recorrer(Nodo<T>* nodito){//, const string& nodo_anterior){
+    stringstream retorno;
+    if(nodito!=NULL){
+        retorno << "p" << nodito << "[label=\"" << nodito->getDato() << "\"];" << endl;
+        if (nodito->anterior!=NULL)
+            retorno << "p" << nodito->anterior << "-> p" << nodito << endl;
+        if (nodito->siguiente!=NULL)
+            retorno << "p" << nodito->siguiente << "-> p" << nodito << endl;
+        retorno << recorrer(nodito->siguiente);
+    }
+    return retorno.str();
 }
 #endif	/* LISTACIRCULAR_H */
 

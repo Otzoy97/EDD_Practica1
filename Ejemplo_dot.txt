@@ -1,0 +1,124 @@
+
+digraph "" { 
+rankdir=LR;
+
+    node [shape=record, fontsize=12];
+
+    subgraph cluster02{
+        node1 [label="1"];
+        node2 [label="2"];
+        node3 [label="3"];
+        node4 [label="4"];
+        node5 [label="5"];
+        node5->node1
+        node1 -> node2 -> node3 -> node4 -> node5;
+        node5 -> node4 -> node3 -> node2 -> node1;
+        node1->node5
+        label = "Compras"
+    }
+    subgraph cluster03{
+        label = "Cajas"
+        node6 [label="1"];
+        
+      
+        node6 -> node7 -> node8 -> node9 -> node10;
+        node10 -> node9 -> node8 -> node7 -> node6;    
+          node7 [label="2"];
+        node8 [label="3"];
+        node9 [label="4"];
+        node10 [label="5"];  
+    }
+
+
+
+    subgraph cluster04{
+        label = "Cola de pago"
+		node11 [label="1"];           
+        node12 [label="1"];
+        node13 [label="1"];
+        node14 [label="1"];
+        node15 [label="1"];
+        node11->node12->node13->node14->node15;
+    }
+
+    subgraph cluster05{
+        label = "Cola de carretas"
+		node16 [label="1"];           
+        node17 [label="1"];
+        node18 [label="1"];
+        node19 [label="1"];
+        node20 [label="1"];
+        node16->node17->node18->node19->node20;
+    }
+
+    subgraph cluster{ 
+        label = "Carretas" 
+subgraph cluster0 {
+label = "Pila 1"
+p0x55aab05c1e70[label = "9|8|7|6|5|4|3|2|1|0" color = black]
+color = white
+style = filled
+}
+subgraph cluster1 {
+label = "Pila 2"
+p0x55aab05c1e71[label = "9|8|7|6|5|4|3|2|1|0" color = black]
+color = white
+style = filled
+}
+
+        color = "gray"
+                style = "filled"
+    p0x55aab05c1e70->p0x55aab05c1e71  
+    }
+
+subgraph  {
+label = "Pila 2"
+p0x5615a09bbe70[label = "9|8|7|6|5|4|3|2|1|0" color = black]
+color = white
+style = filled
+}
+
+subgraph cluster0{
+label = "Compras"
+p0x55c4f61a7e90[label= "0"];
+p0x55c4f61a7eb0-> p0x55c4f61a7e90
+p0x55c4f61a7fb0-> p0x55c4f61a7e90
+p0x55c4f61a7eb0[label= "1"];
+p0x55c4f61a7ed0-> p0x55c4f61a7eb0
+p0x55c4f61a7e90-> p0x55c4f61a7eb0
+p0x55c4f61a7ed0[label= "2"];
+p0x55c4f61a7ef0-> p0x55c4f61a7ed0
+p0x55c4f61a7eb0-> p0x55c4f61a7ed0
+p0x55c4f61a7ef0[label= "3"];
+p0x55c4f61a7f10-> p0x55c4f61a7ef0
+p0x55c4f61a7ed0-> p0x55c4f61a7ef0
+p0x55c4f61a7f10[label= "4"];
+p0x55c4f61a7f30-> p0x55c4f61a7f10
+p0x55c4f61a7ef0-> p0x55c4f61a7f10
+p0x55c4f61a7f30[label= "5"];
+p0x55c4f61a7f50-> p0x55c4f61a7f30
+p0x55c4f61a7f10-> p0x55c4f61a7f30
+p0x55c4f61a7f50[label= "6"];
+p0x55c4f61a7f70-> p0x55c4f61a7f50
+p0x55c4f61a7f30-> p0x55c4f61a7f50
+p0x55c4f61a7f70[label= "7"];
+p0x55c4f61a7f90-> p0x55c4f61a7f70
+p0x55c4f61a7f50-> p0x55c4f61a7f70
+p0x55c4f61a7f90[label= "8"];
+p0x55c4f61a7fb0-> p0x55c4f61a7f90
+p0x55c4f61a7f70-> p0x55c4f61a7f90
+p0x55c4f61a7fb0[label= "9"];
+p0x55c4f61a7e90-> p0x55c4f61a7fb0
+p0x55c4f61a7f90-> p0x55c4f61a7fb0
+}
+
+
+
+
+
+
+
+
+
+
+ }

@@ -17,7 +17,9 @@ template <class T> class Cola{
         void encolar(T dato);
         T desencolar();
         void print();
+        string dot(const string& nombre, int contador);
     private:
+        string recorrer(Nodo<T> *nodito);
         Nodo<T> *inicio;
         Nodo<T> *final;
         int largo = 0;
@@ -62,5 +64,21 @@ template <class T> void Cola<T>::print(){
     delete temp;
 }
 
+template <class T> string Cola<T>::dot(const string& nombre, int contador){
+    stringstream retorno;
+    retorno << "subgraph cluster" << contador << "{" << endl << "label = \"" << nombre << "\"" << endl << recorrer(inicio) << "}" << endl;
+    return retorno.str();
+}
+
+template <class T> string Cola<T>::recorrer(Nodo<T>* nodito){
+    stringstream retorno;
+    if(nodito!=NULL){
+        retorno << "p" << nodito << "[label=\"" << nodito->getDato() << "\"];" << endl;
+        if (nodito->siguiente!=NULL)
+            retorno << "p" << nodito<< "-> p" << nodito->siguiente << endl;
+        retorno << recorrer(nodito->siguiente);
+    }
+    return retorno.str();
+}
 #endif	/* COLA_H */
 

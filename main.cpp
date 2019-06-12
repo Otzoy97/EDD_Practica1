@@ -19,7 +19,7 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     //El tiempo de servicio es el número de turnos que tarda una caja en atender un cliente
-    //Número aleatorio para decidir el tiempo de servicio (1 - 10) (Al crear una caja -no varía)
+    //Número aleatorio para decidir el tiempo de servicio (1 - 10) (Al crear una caja -no varía)            
 }
 
 
