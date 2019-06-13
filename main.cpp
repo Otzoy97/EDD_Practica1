@@ -25,7 +25,7 @@ using namespace std;
 //Contador de clientes
 int no_clientes = 1;
 //Contador de turnos
-int no_turno = 1;
+int no_turno = 0;
 //Flag para la continua ejecución del MENU
 bool flag = true;
 Pila<Carreta> *carretas1 = new Pila<Carreta>();
@@ -126,7 +126,7 @@ int main(int argc, char** argv) {
  */
 int menu(){
     int opcion;
-    cout << "================== TURNO "<< no_turno++ << " ==================" << endl << endl;
+    cout << "================== TURNO "<< ++no_turno << " ==================" << endl << endl;
     cout << "------------ MENU -------------" << endl;
     cout << "| 1. Insertar nuevos clientes |" << endl;
     cout << "| 2. Mostrar reportes         |" << endl;
