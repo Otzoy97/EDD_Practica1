@@ -15,6 +15,7 @@ public:
     Nodo *siguiente;
     Nodo *anterior;
     Nodo(T dato);
+    Nodo(){dato = 0;}
     T getDato();
 private:    
    T dato;

@@ -16,6 +16,7 @@ template <class T> class Cola{
         int getLargo();
         void encolar(T dato);
         T desencolar();
+        T peek();
         void print();
         string dot(const string& nombre, int contador);
     private:
@@ -53,6 +54,10 @@ template <class T> T Cola<T>::desencolar(){
     delete temp;
     largo--;
     return dato;
+}
+
+template <class T> T Cola<T>::peek(){
+    return inicio->getDato();
 }
 
 template <class T> void Cola<T>::print(){

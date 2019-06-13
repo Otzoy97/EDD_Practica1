@@ -24,6 +24,7 @@ template <class T> class ListaDoble{
         T removeAt (int index);
         void print();
         string dot(const string& nombre, int contador);
+        Nodo<T> *getInicio(){return inicio;}
     private:
         string recorrer(Nodo<T> *nodito);//, const string& nodo_anterior);
         Nodo<T> *inicio;

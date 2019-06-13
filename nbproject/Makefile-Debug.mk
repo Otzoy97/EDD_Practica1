@@ -35,6 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Caja.o \
+	${OBJECTDIR}/Carreta.o \
+	${OBJECTDIR}/Cliente.o \
 	${OBJECTDIR}/main.o
 
 
@@ -61,6 +64,21 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/_edd_practica_1: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/_edd_practica_1 ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/Caja.o: Caja.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Caja.o Caja.cpp
+
+${OBJECTDIR}/Carreta.o: Carreta.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Carreta.o Carreta.cpp
+
+${OBJECTDIR}/Cliente.o: Cliente.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Cliente.o Cliente.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

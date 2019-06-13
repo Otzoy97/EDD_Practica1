@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Caja.h</itemPath>
+      <itemPath>Carreta.h</itemPath>
+      <itemPath>Cliente.h</itemPath>
       <itemPath>Cola.h</itemPath>
       <itemPath>ListaCircularDoble.h</itemPath>
       <itemPath>ListaDoble.h</itemPath>
@@ -17,6 +20,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Caja.cpp</itemPath>
+      <itemPath>Carreta.cpp</itemPath>
+      <itemPath>Cliente.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -41,6 +47,18 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="Caja.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Caja.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Carreta.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Carreta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Cliente.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Cliente.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Cola.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ListaCircularDoble.h" ex="false" tool="3" flavor2="0">
@@ -74,6 +92,18 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Caja.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Caja.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Carreta.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Carreta.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Cliente.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Cliente.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Cola.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ListaCircularDoble.h" ex="false" tool="3" flavor2="0">
