@@ -44,13 +44,17 @@ bool Caja::isBusy(){
     return estado;
 }
 
+void Caja::actualizarContador(){
+    atendiendo.setTiempo(atendiendo.getTiempo() -1 );
+}
+
 ostream & operator << (ostream &out, const Caja &a)
 {
-    out << "Caja " << a.indice << endl << a.tiempo_servicio << " turnos" << endl;
+    out << "Caja " << a.indice << "\\n" << a.tiempo_servicio << " turnos" << "\\n";
     if(a.estado){
-        out << "Ocupada" << endl << a.atendiendo;
+        out << "Ocupada" << "\\n" << a.atendiendo;
     } else {
-        out << "Libre" << endl;
+        out << "Libre" << "\\n";
     }
     return out;
 }

@@ -19,11 +19,13 @@ public:
     void setCliente(Cliente cliente);
     void delCliente();
     Cliente getCliente();
+    void actualizarContador();
     bool isBusy();
     friend ostream & operator << (ostream &out, const Caja &a);
     int indice;
     int tiempo_servicio;
     bool estado;
+    void setEstado(bool estado_){estado = estado_;}
 private:
     
     Cliente atendiendo;

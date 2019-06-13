@@ -6,12 +6,14 @@
  */
 
 #include <cstdlib>
+#include <sstream>
+#include <fstream>
 #include <iostream>
 #include "ListaCircularDoble.h"
 #include "ListaDoble.h"
 #include "Pila.h"
 #include "Cola.h"
-#include <string>
+#include <string.h>
 #include <stdio.h>
 #include "Carreta.h"
 #include "Caja.h"
@@ -124,6 +126,7 @@ int main(int argc, char** argv) {
  */
 int menu(){
     int opcion;
+    cout << "================== TURNO "<< no_turno++ << " ==================" << endl << endl;
     cout << "------------ MENU -------------" << endl;
     cout << "| 1. Insertar nuevos clientes |" << endl;
     cout << "| 2. Mostrar reportes         |" << endl;
@@ -149,7 +152,6 @@ int menu(){
  * @return 
  */
 int recorrer(){
-    cout << "================== TURNO "<< no_turno++ << " ==================";
     int nuevos;
     cout << "¿Cuántos nuevos clientes entrarán?" << endl;
     //Especifica la cantidad de nuevos clientes
@@ -161,48 +163,61 @@ int recorrer(){
     cout << endl;
     //Recorre la lista de cajas buscando clientes en los que 
     //ya haya finalizado su tiempo de espera
-    Nodo<Caja> *inicioCaja = cajas->getInicio();
     Cliente tempCliente;
+    Caja tempCaja;
     int random = rand()%100 + 1;
-    while(inicioCaja!=NULL){
-        if(inicioCaja->getDato().isBusy()){
-            if(inicioCaja->getDato().getCliente().getTiempo() == 0){
+    int temp = 0;
+    int auxLargo = cajas->getLargo();
+    for(int i =0 ; i < auxLargo ; i++){
+        tempCaja = cajas->removeAt(0);
+        if(tempCaja.isBusy()){
+            if(tempCaja.getCliente().getTiempo() == 0){
+                //Decide a dónde mandar la carreta que se liberará
                 if(rand()%2){
-                    cout << inicioCaja->getDato().getCliente() << " salió del supermercado. " << inicioCaja->getDato().getCliente().usando << " y caja " << inicioCaja->getDato().indice << " libres" << endl << endl;
-                    carretas1->push(inicioCaja->getDato().getCliente().devolverCarreta());
+                    carretas1->push(tempCaja.getCliente().devolverCarreta());
+                    cout << "Cliente " << tempCaja.getCliente().indice << " salió del supermercado. " << carretas1->peek() << " y caja " << tempCaja.indice << " libres" << endl << endl;
                 } else {
-                    cout << inicioCaja->getDato().getCliente() << " salió del supermercado. " << inicioCaja->getDato().getCliente().usando << " y caja " << inicioCaja->getDato().indice << " libres" << endl << endl;
-                    carretas2->push(inicioCaja->getDato().getCliente().devolverCarreta());
+                    carretas2->push(tempCaja.getCliente().devolverCarreta());
+                    cout << "Cliente " << tempCaja.getCliente().indice << " salió del supermercado. " << carretas2->peek() << " y caja " << tempCaja.indice << " libres" << endl << endl;
                 }
+                //Decide de dónde sacar clientes para meter a la caja recién liberada
                 if(!clPagar->isEmpty()){
-                    cout << "Cliente " << clPagar->peek().indice << " salió de cola de pagos y empezó a ser atendido por Caja " << inicioCaja->getDato().indice << ". Quedan " << ( inicioCaja->getDato().tiempo_servicio - 1)  << " turnos" <<endl << endl;
-                    inicioCaja->getDato().setCliente(clPagar->desencolar());
+                    cout << "Cliente " << clPagar->peek().indice << " salió de cola de pagos y empezó a ser atendido por Caja " << tempCaja.indice << ". Quedan " << ( tempCaja.tiempo_servicio - 1)  << " turnos" <<endl << endl;
+                    tempCaja.setCliente(clPagar->desencolar());
+                    tempCaja.estado = true;
                 } else {
                     if(random <= compras->getLargo()){
-                        inicioCaja->getDato().setCliente(compras->removeAt(random-1));
-                        cout << "Cliente " << inicioCaja->getDato().getCliente().indice << " salió de lista de compras y empezó a ser atendido por Caja " << inicioCaja->getDato().indice << ". Quedan " << ( inicioCaja->getDato().tiempo_servicio - 1) << " turnos" <<endl << endl;
+                        tempCaja.setCliente(compras->removeAt(random-1));
+                        tempCaja.estado = true;
+                        cout << "Cliente " << tempCaja.getCliente().indice << " salió de lista de compras y empezó a ser atendido por Caja " << tempCaja.indice << ". Quedan " << ( tempCaja.tiempo_servicio - 1) << " turnos" <<endl << endl;
                     } else {
-                        inicioCaja->getDato().delCliente();
+                        //No se pasó ningún clinete, la caja se libera totalmente
+                        tempCaja.delCliente();
                     }
                     random = rand()%100+1;
                 } 
             } else {
-                cout << "Cliente " << inicioCaja->getDato().getCliente().indice << " está siendo atendido por Caja " << inicioCaja->getDato().indice << ". Quedan "  << inicioCaja->getDato().getCliente().getTiempo() << " turnos" << endl << endl;
-                inicioCaja->getDato().getCliente().setTiempo(inicioCaja->getDato().getCliente().getTiempo()-1);    
+                //Se actualiza el conteo
+                tempCaja.actualizarContador();
+                cout << "Cliente " << tempCaja.getCliente().indice << " está siendo atendido por Caja " << tempCaja.indice << ". Quedan "  << tempCaja.getCliente().getTiempo() << " turnos" << endl << endl;
+                
             }
         } else {
+            //Decide de dónde sacar clientes para meter a la caja libre
             if(!clPagar->isEmpty()){
-                cout << "Cliente " << clPagar->peek().indice << " salió de cola de pagos y empezó a ser atendido por Caja " << inicioCaja->getDato().indice << ". Quedan " << ( inicioCaja->getDato().tiempo_servicio - 1)  << " turnos" <<endl << endl;
-                inicioCaja->getDato().setCliente(clPagar->desencolar());
+                cout << "Cliente " << clPagar->peek().indice << " salió de cola de pagos y empezó a ser atendido por Caja " << tempCaja.indice << ". Quedan " << ( tempCaja.tiempo_servicio - 1)  << " turnos" <<endl << endl;
+                tempCaja.setCliente(clPagar->desencolar());
+                tempCaja.setEstado(true);
             } else {
                 if(random <= compras->getLargo()){
-                    inicioCaja->getDato().setCliente(compras->removeAt(random-1));
-                    cout << "Cliente " << inicioCaja->getDato().getCliente().indice << " salió de lista de compras y empezó a ser atendido por Caja " << inicioCaja->getDato().indice << ". Quedan " << ( inicioCaja->getDato().tiempo_servicio - 1) << " turnos" <<endl << endl;
+                    tempCaja.estado = true;
+                    tempCaja.setCliente(compras->removeAt(random-1));
+                    cout << "Cliente " << tempCaja.getCliente().indice << " salió de lista de compras y empezó a ser atendido por Caja " << tempCaja.indice << ". Quedan " << ( tempCaja.tiempo_servicio - 1) << " turnos" <<endl << endl;
                 }
                 random = rand()%100+1;
             } 
         }
-        inicioCaja = inicioCaja->siguiente;
+        cajas->addLast(tempCaja);
     }
     //Sacar de la lista y meter a la cola de pagos
     if(random <= compras->getLargo()){
@@ -244,11 +259,46 @@ int recorrer(){
         cout << "Cliente " << iCliente.indice << " espera por una carreta" << endl << endl ;
         nuevos--;
     }
+    cout << endl;
 }
 /**
  * Recupera el texto dot de las estructuras, genera el grafo, el archivo, la imagen y por último la muestra
  * @return 
  */
 int reportar(){
+    stringstream str;
+    int contador =0;
+    str << "digraph G{" << endl;
+    str << "rankdir = LR;" << endl << "node [shape=record, fontsize=10]" << endl;
+    str << cajas->dot("Cajas", contador++) << endl;
+    if (!clPagar->isEmpty())
+        str << clPagar->dot("Cola de pago", contador++) << endl;
+    if (!compras->isEmpty())
+        str <<  compras->dot("Compras", contador++) << endl;
+    if(!clCarreta->isEmpty())
+        str << clCarreta->dot("Cola de_carretas",contador++) << endl;
+    str << carretas1->dot("Pila 1", contador++) << endl;
+    str << carretas2->dot("Pila 2", contador++) << endl;
     
+    str << "p" << carretas1 << "-> p" << carretas2 << endl;
+    str << "}";
+    stringstream aux;
+    aux << "turno" << no_turno;
+    char cmd[50] = "dot -Tpng ";
+    strcat(cmd, aux.str().c_str());
+    strcat(cmd, " -o ");
+    strcat(cmd, aux.str().c_str());
+    strcat(cmd, ".png");
+    //Crea el archivo dot
+    ofstream fp;
+    fp.open(aux.str());
+    fp << str.str();
+    fp.close();
+    system(cmd);
+    remove(aux.str().c_str());
+    //Muestra la imagen
+    char abrir[20] = "eog ";
+    strcat(abrir, aux.str().c_str());
+    strcat(abrir,".png");
+    system(abrir);
 }

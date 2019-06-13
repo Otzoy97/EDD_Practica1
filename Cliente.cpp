@@ -10,7 +10,7 @@
 ostream & operator << (ostream &out, const Cliente &a){
     out << "Cliente " << a.indice;
     if(a.tieneCarreta)
-        out << "\n" << a.usando;
+        out << "\\n" << a.usando;
     return out;
 }
 
@@ -38,12 +38,12 @@ Carreta Cliente::devolverCarreta(){
     return usando;
 }
 
-void Cliente::setTiempo(int tiempo_){
+void Cliente::disminuirTiempo(){
+    --tiempo_espera;
+}
+void Cliente::setTiempo(const int& tiempo_){
     tiempo_espera = tiempo_;
 }
-
 int Cliente::getTiempo(){
     return tiempo_espera;
 }
-
-

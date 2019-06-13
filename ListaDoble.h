@@ -24,13 +24,35 @@ template <class T> class ListaDoble{
         T removeAt (int index);
         void print();
         string dot(const string& nombre, int contador);
-        Nodo<T> *getInicio(){return inicio;}
+        void addAt(int index, T nuevo);
     private:
         string recorrer(Nodo<T> *nodito);//, const string& nodo_anterior);
         Nodo<T> *inicio;
         Nodo<T> *final;
         int largo = 0;
 };
+
+template <class T> void ListaDoble<T>::addAt(int index, T dato){
+    Nodo<T> *nuevo = new Nodo<T>(dato);
+    if(index==0){
+        nuevo->siguiente = inicio;
+        inicio->anterior = nuevo;
+        inicio = nuevo;
+        largo++;
+        return;
+    }
+    int contador = 0;
+    Nodo<T> *temp = inicio;
+    while(contador != index){
+        temp = temp->siguiente;
+        contador++;
+    }
+    nuevo->anterior = temp->anterior;
+    nuevo->siguiente = temp;
+    temp->anterior->siguiente = nuevo;
+    temp->anterior = nuevo;
+    largo++;
+}
 
 template <class T> bool ListaDoble<T>::isEmpty(){
     return inicio==NULL;
@@ -106,9 +128,10 @@ template <class T> T ListaDoble<T>::removeAt(int index){
     if(index == 0){
         dato = inicio->getDato();
         if(getLargo() > 1){
-            inicio = temp->siguiente;
             temp->siguiente->anterior = NULL;
+            inicio = temp->siguiente;
         } else {
+            final = NULL;
             inicio = NULL;
         }
         largo--;

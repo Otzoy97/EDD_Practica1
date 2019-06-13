@@ -110,6 +110,7 @@ template <class T> T ListaCircularDoble<T>::removeAt(int index){
             temp->siguiente->anterior = NULL;
         } else {
             inicio =NULL;
+            final = NULL;
         }
         largo--;
         delete temp;
@@ -151,7 +152,7 @@ template <class T> string ListaCircularDoble<T>::dot(const string& nombre, int c
         if (temp->anterior!=NULL)
             retorno << "p" << temp->anterior << "-> p" << temp << endl;
         temp = temp->siguiente;
-    } while (temp!=inicio);  
+    } while (temp!=inicio && temp!=NULL);  
     retorno << "}" << endl;
     return retorno.str();
 }

@@ -19,19 +19,16 @@ public:
     Cliente(int indice_);
     void setCarreta(Carreta carreta);
     Carreta devolverCarreta();
-    void setTiempo(int tiempo_);
-    int getTiempo();
     friend ostream & operator << (ostream &out, const Cliente &a);
     int indice;
-    
     Carreta usando;
-private:
-    
-    int tiempo_espera;
-    
+    void disminuirTiempo();
+    void setTiempo(const int &tiempo_);
+    int getTiempo();
+private:  
     bool tieneCarreta;
+    int tiempo_espera;
 };
-
 
 
 #endif	/* CLIENTE_H */
