@@ -27,6 +27,8 @@ private:
 template <class T> Nodo<T>::Nodo(T dat)
 {
     dato = dat;
+    siguiente = 0;
+    anterior = 0;
 }
 /**
  * 
