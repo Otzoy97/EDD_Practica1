@@ -295,6 +295,10 @@ int reportar(){
     fp << str.str();
     fp.close();
     system(cmd);
+    int contador_ = 10000;
+    while(contador_){
+        contador_--;
+    }
     remove(aux.str().c_str());
     //Muestra la imagen
     char abrir[20] = "eog ";
